@@ -1,0 +1,7 @@
+53a54,59
+> 
+>     if (Maze.result == Maze.ResultType.SUCCESS) {
+>         Maze.log.push(['finish', null]);
+>     }
+>     Maze.reset(false);
+> 

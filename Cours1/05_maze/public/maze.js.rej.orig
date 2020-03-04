@@ -1,0 +1,94 @@
+***************
+*** 55,56
+-     obstacleIdle: visuals_directory_path + json.visuals.obstacleIdle,
+-     obstacleAnimation: visuals_directory_path + json.visuals.obstacleAnimation,
+--- 0 -----
+***************
+*** 325,326
+-                 obsIcon.setAttributeNS(
+-                     'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
+--- 347,363 -----
++                 if(Maze.SKIN.obstacleIdle instanceof Array){
++                     var index = getCloserPath(x, y);
++                     obsIcon.setAttributeNS(
++                         'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle[index]);
++                     if(Maze.SKIN.obstacleIdle[index].includes("png")){ //PNG images don't need to be scaled
++                         obsIcon.setAttribute('height', 43);
++                         obsIcon.setAttribute('width', 50);
++                     }
++                 }
++                 else{
++                     obsIcon.setAttributeNS(
++                         'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
++                     if(Maze.SKIN.obstacleIdle.includes("png")){ //PNG images don't need to be scaled
++                         obsIcon.setAttribute('height', 43);
++                         obsIcon.setAttribute('width', 50);
++                     }
++                 }
+***************
+*** 361,363
+-     //
+-     // Blockly.Blocks && (Blockly.Blocks.ONE_BASED_INDEXING = false);
+-     // Blockly.JavaScript && (Blockly.JavaScript.ONE_BASED_INDEXING = false);
+--- 0 -----
+***************
+*** 393,394
+-     // document.body.addEventListener('mousemove', Maze.updatePegSpin_, true);
+- 
+--- 0 -----
+***************
+*** 448,449
+-                 obsIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+-                     Maze.SKIN.obstacleIdle);
+--- 499,508 -----
++                  if(Maze.SKIN.obstacleIdle instanceof Array){
++                     var index = getCloserPath(x, y);
++                     obsIcon.setAttributeNS(
++                         'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle[index]);
++                     obsIcon.setAttribute("type", index)
++                 }
++                 else{
++                     obsIcon.setAttributeNS(
++                         'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
++                 }
+***************
+*** 464,466
+-         //   for (var x = 0; x < Maze.pidList.length; x++) {
+-         //     window.clearTimeout(Maze.pidList[x]);
+-         //   }
+--- 0 -----
+***************
+*** 586
+-     var targetX = Maze.pegmanX + deltaX + 1;
+--- 644 -----
++     var targetX = Maze.pegmanX + deltaX;
+***************
+*** 599,608
+-         obsIcon.setAttributeNS(
+-             'http://www.w3.org/1999/xlink', 'xlink:href',
+-             Maze.SKIN.obstacleAnimation);
+-         Maze.pidList.push(setTimeout(function() {
+-             Maze.displayPegman(Maze.pegmanX + deltaX / 2,
+-                 Maze.pegmanY + deltaY / 2,
+-                 direction16);
+-         }, window.stepSpeed));
+- 
+- 
+--- 657,673 -----
++         obsIcon.setAttribute('height', 43 * Maze.SKIN.obstacleScale); //Animation is always a gif, make sure it is scaled
++         obsIcon.setAttribute('width', 50 * Maze.SKIN.obstacleScale);
++         obsIcon.setAttribute('x',
++             Maze.SQUARE_SIZE * (targetX + 0.5) -
++             obsIcon.getAttribute('width') / 2); //And make sure it is placed correctly
++         obsIcon.setAttribute('y',
++             Maze.SQUARE_SIZE * (targetY + 0.9) -
++             obsIcon.getAttribute('height'));
++         if(Maze.SKIN.obstacleIdle instanceof Array){
++             var index = obsIcon.getAttribute("type");
++             obsIcon.setAttributeNS(
++                 'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleAnimation[index]);
++         }
++         else{
++             obsIcon.setAttributeNS(
++                 'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleAnimation);
++         }

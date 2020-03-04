@@ -45,15 +45,15 @@ Maze.CRASH_STOP = 1;
 Maze.CRASH_SPIN = 2;
 Maze.CRASH_FALL = 3;
 
-var visuals_directory_path = task_directory_path+"maze/"
+//Path to directory with images
+var visuals_directory_path = task_directory_path + "../$common/media/"
 
 Maze.SKIN = {
+//Set base variables
     sprite: visuals_directory_path + json.visuals.sprite,
     tiles: visuals_directory_path + json.visuals.tiles,
     marker: visuals_directory_path + json.visuals.marker,
     goalAnimation: visuals_directory_path + json.visuals.goalAnimation,
-    obstacleIdle: visuals_directory_path + json.visuals.obstacleIdle,
-    obstacleAnimation: visuals_directory_path + json.visuals.obstacleAnimation,
     obstacleScale: json.visuals.obstacleScale,
     background: visuals_directory_path + json.visuals.background,
     graph: json.visuals.graph,
@@ -63,6 +63,28 @@ Maze.SKIN = {
     crashSound: json.visuals.crashSound,
     crashType: Maze.CRASH_STOP
 };
+
+//Look for arrays describing multiple ennemies
+if(json.visuals.obstacleIdle instanceof Array && json.visuals.obstacleAnimation instanceof Array){
+    if(json.visuals.obstacleIdle.length == json.visuals.obstacleAnimation.length){
+        Maze.SKIN.obstacleIdle = []
+        Maze.SKIN.obstacleAnimation = []
+        for(var i = 0; i < json.visuals.obstacleIdle.length; i++){
+            Maze.SKIN.obstacleIdle.push(visuals_directory_path + json.visuals.obstacleIdle[i]);
+            Maze.SKIN.obstacleAnimation.push(visuals_directory_path + json.visuals.obstacleAnimation[i]);
+        }
+    }
+    else{
+        console.warn("Ennemies arrays not matching in size !");
+    }
+}
+else if(json.visuals.obstacleIdle instanceof Array || json.visuals.obstacleAnimation instanceof Array){
+    console.warn("Got only one array for ennemies !");
+}
+else{
+    Maze.SKIN.obstacleIdle = visuals_directory_path + json.visuals.obstacleIdle;
+    Maze.SKIN.obstacleAnimation = visuals_directory_path + json.visuals.obstacleAnimation;
+}
 
 /**
  * Milliseconds between each animation frame.
@@ -322,8 +344,23 @@ Maze.drawMap = function() {
                 obsIcon.setAttribute('id', 'obstacle' + obsId);
                 obsIcon.setAttribute('height', 43 * Maze.SKIN.obstacleScale);
                 obsIcon.setAttribute('width', 50 * Maze.SKIN.obstacleScale);
-                obsIcon.setAttributeNS(
-                    'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
+                if(Maze.SKIN.obstacleIdle instanceof Array){
+                    var index = getCloserPath(x, y);
+                    obsIcon.setAttributeNS(
+                        'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle[index]);
+                    if(Maze.SKIN.obstacleIdle[index].includes("png")){ //PNG images don't need to be scaled
+                        obsIcon.setAttribute('height', 43);
+                        obsIcon.setAttribute('width', 50);
+                    }
+                }
+                else{
+                    obsIcon.setAttributeNS(
+                        'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
+                    if(Maze.SKIN.obstacleIdle.includes("png")){ //PNG images don't need to be scaled
+                        obsIcon.setAttribute('height', 43);
+                        obsIcon.setAttribute('width', 50);
+                    }
+                }
                 obsIcon.setAttribute('x',
                     Maze.SQUARE_SIZE * (x + 0.5) -
                     obsIcon.getAttribute('width') / 2);
@@ -347,6 +384,25 @@ Maze.drawMap = function() {
     svg.appendChild(pegmanIcon);
 };
 
+var getCloserPath = function(x, y){
+    if(x < Maze.ROWS){ //If there is a tile to the right
+        if(Maze.map[y][x+1] != 0) //If there is no wall
+            return 3; // Put right ennemy
+    }
+    if(x > 0){ //If there is a tile to the left
+        if(Maze.map[y][x-1] != 0) //If there is no wall
+            return 1; // Put left ennemy
+    }
+    if(y < Maze.COLS){ //If there is a tile up
+        if(Maze.map[y+1][x] != 0) //If there is no wall
+            return 0; // Put up ennemy
+    }
+    if(y > 0){ //If there is a tile down
+        if(Maze.map[y-1][x] != 0) //If there is no wall
+            return 2; // Put down ennemy
+    }
+}
+
 /**
  * Initialize Blockly and the maze.  Called on page load.
  */
@@ -358,9 +414,6 @@ Maze.init = function() {
         return;
     }
 
-    //
-    // Blockly.Blocks && (Blockly.Blocks.ONE_BASED_INDEXING = false);
-    // Blockly.JavaScript && (Blockly.JavaScript.ONE_BASED_INDEXING = false);
 
     Blockly.getMainWorkspace().getAudioManager().load(Maze.SKIN.winSound, 'win');
     Blockly.getMainWorkspace().getAudioManager().load(Maze.SKIN.crashSound, 'fail');
@@ -389,8 +442,6 @@ Maze.init = function() {
     }
 
     Maze.reset(true);
-
-    // document.body.addEventListener('mousemove', Maze.updatePegSpin_, true);
 
     // Switch to zero-based indexing so that later JS levels match the blocks.
     Blockly.Blocks && (Blockly.Blocks.ONE_BASED_INDEXING = false);
@@ -445,8 +496,16 @@ Maze.reset = function(first) {
         for (x = 0; x < Maze.COLS; x++) {
             var obsIcon = document.getElementById('obstacle' + obsId);
             if (obsIcon) {
-                obsIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-                    Maze.SKIN.obstacleIdle);
+                 if(Maze.SKIN.obstacleIdle instanceof Array){
+                    var index = getCloserPath(x, y);
+                    obsIcon.setAttributeNS(
+                        'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle[index]);
+                    obsIcon.setAttribute("type", index)
+                }
+                else{
+                    obsIcon.setAttributeNS(
+                        'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleIdle);
+                }
             }
             ++obsId;
         }
@@ -461,12 +520,12 @@ Maze.reset = function(first) {
 Maze.animate = function() {
     var action = Maze.log.shift();
     if (!action) {
-        //   for (var x = 0; x < Maze.pidList.length; x++) {
-        //     window.clearTimeout(Maze.pidList[x]);
-        //   }
         return;
     }
+    //Debug
 
+    //console.log("Peg info : \n- dir :"+Maze.pegmanD+"\n-(x, y) : ("+Maze.pegmanX+","+Maze.pegmanY+")")
+    //console.log(action[0])
     switch (action[0]) {
         case 'north':
             Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4], [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
@@ -519,6 +578,8 @@ Maze.animate = function() {
             //     break;
     }
 };
+
+    Maze.pidList.push(setTimeout(Maze.animate, window.stepSpeed * 5));
 
 /**
  * Schedule the animations for a move or turn.
@@ -585,7 +646,7 @@ Maze.scheduleFail = function(forward) {
         deltaY = -deltaY;
     }
 
-    var targetX = Maze.pegmanX + deltaX + 1;
+    var targetX = Maze.pegmanX + deltaX;
     var targetY = Maze.pegmanY + deltaY;
     var squareType = Maze.map[targetY][targetX];
 
@@ -598,22 +659,37 @@ Maze.scheduleFail = function(forward) {
         var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
         var obsId = targetX + Maze.COLS * targetY;
         var obsIcon = document.getElementById('obstacle' + obsId);
-        obsIcon.setAttributeNS(
-            'http://www.w3.org/1999/xlink', 'xlink:href',
-            Maze.SKIN.obstacleAnimation);
+        obsIcon.setAttribute('height', 43 * Maze.SKIN.obstacleScale); //Animation is always a gif, make sure it is scaled
+        obsIcon.setAttribute('width', 50 * Maze.SKIN.obstacleScale);
+        obsIcon.setAttribute('x',
+            Maze.SQUARE_SIZE * (targetX + 0.5) -
+            obsIcon.getAttribute('width') / 2); //And make sure it is placed correctly
+        obsIcon.setAttribute('y',
+            Maze.SQUARE_SIZE * (targetY + 0.9) -
+            obsIcon.getAttribute('height'));
+        if(Maze.SKIN.obstacleIdle instanceof Array){
+            var index = obsIcon.getAttribute("type");
+            obsIcon.setAttributeNS(
+                'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleAnimation[index]);
+        }
+        else{
+            obsIcon.setAttributeNS(
+                'http://www.w3.org/1999/xlink', 'xlink:href', Maze.SKIN.obstacleAnimation);
+        }
+        var pegmanIcon = document.getElementById('pegman');
         Maze.pidList.push(setTimeout(function() {
             Maze.displayPegman(Maze.pegmanX + deltaX / 2,
                 Maze.pegmanY + deltaY / 2,
                 direction16);
         }, window.stepSpeed));
-
-
-        var pegmanIcon = document.getElementById('pegman');
-
+        Maze.pidList.push(setTimeout(function() {
+            Maze.displayPegman(Maze.pegmanX + deltaX,
+                Maze.pegmanY + deltaY,
+                direction16);
+        }, window.stepSpeed * 2))
         Maze.pidList.push(setTimeout(function() {
             pegmanIcon.setAttribute('visibility', 'hidden');
-        }, window.stepSpeed * 2));
-
+        }, window.stepSpeed * 3));
         Maze.pidList.push(setTimeout(function() {
             Blockly.getMainWorkspace().getAudioManager().play('failure');
         }, window.stepSpeed));
@@ -808,7 +884,6 @@ Maze.constrainDirection16 = function(d) {
  * Attempt to move pegman forward or backward.
  * @param {number} direction Direction to move (0 = forward, 2 = backward).
  * @param {string} id ID of block that triggered this action.
- * @throws {true} If the end of the maze is reached.
  * @throws {false} If Pegman collides with a wall.
  */
 Maze.move = function(direction, id) {
@@ -816,25 +891,26 @@ Maze.move = function(direction, id) {
     if (isNotAPath) {
         Maze.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
         Maze.result = Maze.ResultType.ERROR;
+        throw false;
     }
     // If moving backward, flip the effective direction.
     var effectiveDirection = Maze.pegmanD + direction;
     var command;
     switch (Maze.constrainDirection4(effectiveDirection)) {
         case Maze.DirectionType.NORTH:
-            if (isNotAPath) Maze.pegmanY++;
+            Maze.pegmanY--;
             command = 'north';
             break;
         case Maze.DirectionType.EAST:
-            if (isNotAPath) Maze.pegmanX--;
+            Maze.pegmanX++;
             command = 'east';
             break;
         case Maze.DirectionType.SOUTH:
-            if (isNotAPath) Maze.pegmanY--;
+            Maze.pegmanY++;
             command = 'south';
             break;
         case Maze.DirectionType.WEST:
-            if (isNotAPath) Maze.pegmanX++;
+            Maze.pegmanX--;
             command = 'west';
             break;
     }
@@ -849,11 +925,11 @@ Maze.move = function(direction, id) {
 Maze.turn = function(direction, id) {
     if (direction) {
         // Right turn (clockwise).
-        // Maze.pegmanD++;
+        Maze.pegmanD++;
         Maze.log.push(['right', id]);
     } else {
         // Left turn (counterclockwise).
-        // Maze.pegmanD--;
+        Maze.pegmanD--;
         Maze.log.push(['left', id]);
     }
     Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD);

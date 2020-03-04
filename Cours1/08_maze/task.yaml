@@ -43,13 +43,13 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             maxBlocks: '2'
             trashcan: true
             sounds: true
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         type: blockly
         name: ''
         blocks_files:
@@ -57,7 +57,7 @@ problems:
         workspace: <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks"
             style="display:none"></xml>
         header: |-
-            .. image:: 01_maze/maze/small_static_avatar.png
+            .. image:: $common/media/small_static_avatar.png
                 :height: 40px
 
             **Crée une boucle avec le bloc « Répéter jusqu’à ».**

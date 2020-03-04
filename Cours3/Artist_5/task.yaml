@@ -72,7 +72,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             css: true
             trashcan: true
             toolboxPosition: start

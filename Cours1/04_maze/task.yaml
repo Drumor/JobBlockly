@@ -38,15 +38,15 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             trashcan: true
             toolboxPosition: start
             css: true
             sounds: true
             maxBlocks: '2'
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         type: blockly
         name: ''
         blocks_files:
@@ -55,7 +55,7 @@ problems:
             <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks"
             style="display:none"></xml>
         header: |-
-            .. image:: 01_maze/maze/small_static_avatar.png
+            .. image:: $common/media/small_static_avatar.png
                 :height: 40px
 
             **Essaie le bloc « Répéter » pour utiliser moins de blocs...**

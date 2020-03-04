@@ -1,7 +1,7 @@
 accessible: true
 author: Florian Thuin
 context: |-
-    .. image:: 01_maze/maze/small_static_avatar.png
+    .. image:: $common/media/small_static_avatar.png
         :height: 40px
 
     **Amène le zombie vers le tournesol, mais évite la plante carnivore !**
@@ -41,7 +41,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             toolboxPosition: start
             trashcan: true
             css: true
@@ -49,8 +49,8 @@ problems:
             maxBlocks: '5'
         type: blockly
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         name: ''
         blocks_files:
         - blocks.js

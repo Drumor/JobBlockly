@@ -45,7 +45,8 @@ Maze.CRASH_STOP = 1;
 Maze.CRASH_SPIN = 2;
 Maze.CRASH_FALL = 3;
 
-var visuals_directory_path = task_directory_path+"maze/"
+//Path to directory with images
+var visuals_directory_path = task_directory_path + "../$common/media/"
 
 Maze.SKIN = {
     sprite: visuals_directory_path + json.visuals.sprite,

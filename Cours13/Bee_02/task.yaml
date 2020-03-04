@@ -57,7 +57,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             css: true
             toolboxPosition: start
             trashcan: true
@@ -74,7 +74,7 @@ problems:
             <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks"
               style="display:none"></xml>
         header: |
-            .. image:: 01_maze/maze/small_static_avatar.png
+            .. image:: $common/media/small_static_avatar.png
                 :height: 40px
 
             **Aide-moi à récolter tout le nectar de chaque fleur.**

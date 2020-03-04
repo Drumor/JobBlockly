@@ -60,7 +60,7 @@ problems:
             scrollbars: true
             visual:
                 position: left
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             oneBasedIndex: true
             toolboxPosition: start
             css: true

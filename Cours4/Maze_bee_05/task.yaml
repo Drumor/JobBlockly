@@ -64,7 +64,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             trashcan: true
             toolboxPosition: start
             css: true

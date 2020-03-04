@@ -1,0 +1,46 @@
+accessible: true
+author: ogo
+context: foo bar
+environment: java7
+evaluate: best
+groups: false
+input_random: '0'
+limits:
+    memory: '100'
+    time: '30'
+    output: '2'
+name: Mon test blockly - ogo
+network_grading: false
+problems:
+    sub1:
+        toolbox: <xml></xml>
+        workspace: <xml></xml>
+        options:
+            grid:
+                spacing: 20
+                colour: '#ccc'
+                snap: true
+                length: 3
+            zoom:
+                maxScale: 3.0
+                scaleSpeed: 1.2
+                controls: true
+                startScale: 1.0
+                minScale: 0.3
+                wheel: false
+            media: plugins/blockly/static/blockly/media/
+            css: true
+            toolboxPosition: start
+            speed: '60'
+            oneBasedIndex: true
+            maxBlocks: Infinity
+            scrollbars: true
+        name: sub1 title
+        type: blockly
+        header: ''
+stored_submissions: 0
+submission_limit:
+    amount: -1
+    period: -1
+tags: {}
+weight: 1.0

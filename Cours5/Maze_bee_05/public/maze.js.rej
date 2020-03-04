@@ -1,0 +1,6 @@
+***************
+*** 48
+- var visuals_directory_path = task_directory_path+"maze/"
+--- 48,49 -----
++ //Path to directory with images
++ var visuals_directory_path = task_directory_path + "../$common/media/"

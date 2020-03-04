@@ -1,7 +1,7 @@
 accessible: true
 author: Florian Thuin
 context: |-
-    .. image:: 01_maze/maze/small_static_avatar.png
+    .. image:: $common/media/small_static_avatar.png
         :height: 40px
 
     **Utilise le bloc « Répéter » pour amener le zombie au tournesol. (Évite les plantes carnivores!)**
@@ -42,15 +42,15 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             toolboxPosition: start
             css: true
             trashcan: true
             sounds: true
             maxBlocks: '14'
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         type: blockly
         blocks_files:
         - blocks.js
@@ -58,7 +58,7 @@ problems:
             style="display:none"></xml>
         name: ''
         header: |-
-            .. image:: 01_maze/maze/small_static_avatar.png
+            .. image:: $common/media/small_static_avatar.png
                 :height: 40px
 
             **Utilise le bloc « Répéter » pour amener le zombie au tournesol. (Évite les plantes carnivores!)**

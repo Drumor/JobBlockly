@@ -19,7 +19,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             toolboxPosition: start
             css: true
             sounds: true

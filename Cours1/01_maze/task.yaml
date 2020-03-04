@@ -40,15 +40,27 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            zoom:
+                scaleSpeed: 1.2
+                maxScale: 3.0
+                minScale: 0.3
+                controls: true
+                startScale: 1.0
+                wheel: false
+            grid:
+                snap: true
+                colour: '#ccc'
+                length: 3
+                spacing: 20
+            media: /plugins/blockly/static/blockly/media/
             css: true
             trashcan: true
             toolboxPosition: start
             sounds: true
             maxBlocks: '4'
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         type: blockly
         name: ''
         blocks_files:
@@ -58,7 +70,7 @@ problems:
               <block type="maze_moveForward"></block>
             </xml>
         header: |-
-            .. image:: 01_maze/maze/small_static_avatar.png
+            .. image:: $common/media/small_static_avatar.png
                 :height: 40px
 
             **Chère personne. Moi zombie. Devoir... atteindre... tournesol.**

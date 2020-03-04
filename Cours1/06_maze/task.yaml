@@ -1,7 +1,7 @@
 accessible: true
 author: Florian Thuin
 context: |-
-    .. image:: 01_maze/maze/small_static_avatar.png
+    .. image:: $common/media/small_static_avatar.png
         :height: 40px
 
     **Chère personne. Moi zombie. Devoir... atteindre... tournesol.**
@@ -42,15 +42,15 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             toolboxPosition: start
             trashcan: true
             css: true
             sounds: true
             maxBlocks: '10'
         files:
-        - maze.js
-        - interpreter.js
+        - ../$common/maze.js
+        - ../$common/interpreter.js
         type: blockly
         name: ''
         blocks_files:

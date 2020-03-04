@@ -73,7 +73,7 @@ problems:
             visual:
                 position: left
             oneBasedIndex: true
-            media: /static/common/js/blockly/media/
+            media: /plugins/blockly/static/blockly/media/
             maxBlocks: Infinity
             trashcan: true
             sounds: true
