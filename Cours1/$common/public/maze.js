@@ -528,10 +528,11 @@ Maze.animate = function() {
     //Debug
     //console.log("Peg info : \n- dir :"+Maze.pegmanD+"\n-(x, y) : ("+Maze.pegmanX+","+Maze.pegmanY+")")
     //console.log(action[0])
+
     switch (action[0]) {
         case 'north':
             Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4], [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
-            Maze.pegmanY--;
+            Maze.pegmanY-=1;
             break;
         case 'east':
             Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4], [Maze.pegmanX + 1, Maze.pegmanY, Maze.pegmanD * 4]);

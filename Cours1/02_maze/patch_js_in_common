@@ -1,6 +1,0 @@
-52,53c52,53
-<         - maze.js
-<         - interpreter.js
----
->         - ../$common/maze.js
->         - ../$common/interpreter.js

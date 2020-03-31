@@ -1,4 +1,0 @@
-44c44
-<             media: /static/common/js/blockly/media/
----
->             media: /plugins/blockly/static/blockly/media/

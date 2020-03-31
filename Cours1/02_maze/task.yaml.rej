@@ -1,7 +1,0 @@
-***************
-*** 52,53
--         - maze.js
--         - interpreter.js
---- 52,53 -----
-+         - ../$common/maze.js
-+         - ../$common/interpreter.js

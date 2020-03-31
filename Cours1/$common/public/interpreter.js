@@ -51,7 +51,6 @@ var initInterpreterApi = function(interpreter, scope) {
 };
 
 var animate = function() {
-
     if (Maze.result == Maze.ResultType.SUCCESS) {
         Maze.log.push(['finish', null]);
     }

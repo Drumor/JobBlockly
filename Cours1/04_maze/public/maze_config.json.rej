@@ -1,9 +1,0 @@
-***************
-*** 33,35
-- 		"obstacleIdle":"obstacleIdle.gif",
-- 		"obstacleAnimation":"obstacle.gif",
-- 		"obstacleScale":1.2,
---- 33,35 -----
-+         "obstacleIdle":["obstacleDownIdle.png", "obstacleLeftIdle.gif", "obstacleUpIdle.png", "obstacleRightIdle.gif"],
-+         "obstacleAnimation":["obstacleDown.gif", "obstacleLeft.gif", "obstacleUp.gif", "obstacleRight.gif"],
-+         "obstacleScale":1.2,
