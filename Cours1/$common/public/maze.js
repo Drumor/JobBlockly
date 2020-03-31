@@ -532,7 +532,7 @@ Maze.animate = function() {
     switch (action[0]) {
         case 'north':
             Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4], [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
-            Maze.pegmanY-=1;
+            Maze.pegmanY--;
             break;
         case 'east':
             Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4], [Maze.pegmanX + 1, Maze.pegmanY, Maze.pegmanD * 4]);
