@@ -4,7 +4,7 @@ var task_directory_path = window.location.pathname + "/";
 window.Turtle = {};
 window.Maze = {};
 
-//Get the json file and it's information
+//Get the json file and its informations
 var turtle_file = ""
 if(task_directory_path.includes("edit")){ //When we are editing the task
     turtle_file = task_directory_path.replace("admin","course").replace("edit/task/","")+"turtle_config.json"
@@ -17,28 +17,16 @@ request.send(null)
 var json = JSON.parse(request.responseText);
 
 var imagePath = ""
-if(json.imageSolution) //If there is a solution image, use it
+if(json.imageSolution)
 	imagePath = task_directory_path+json.imageName;
 
 //Code of the solution
 var solution = function(){
-	//Here, put the javascript corresponding to the solved exercice (or use the image)
+	//Here, put the javascript corresponding to the solved exercice
 }
 //Code of the decor
 var decoration = function(){
-	//Here, put the code for any decor, not part of the exercice;
-	for(var count = 0; count < 3; count ++){
-		Turtle.turnLeft(60);
-		Turtle.moveForward(50);
-		Turtle.turnRight(120);
-		Turtle.moveForward(50);
-		Turtle.turnLeft(60);
-	}
-}
-
-var randomColour = function(){
-	var colour = Math.floor(Math.random()*16777215);
-	return "#"+colour.toString(16).toUpperCase()
+	//Here, put the code for any decor, not part of the exercice
 }
 
 //Canvas size
@@ -185,6 +173,7 @@ Turtle.addSolution = function(){
 	
 }
 
+
 Turtle.drawSolution = function(){
 	var c = document.getElementById("solution-canvas");
 	var ctx = c.getContext("2d")
@@ -320,21 +309,6 @@ Turtle.moveForward = function(length){
 
 Turtle.moveBackwards = function(length){
 	Turtle.move(-length);
-}
-
-Turtle.circle = function(radius){
-	var c;
-	if(sol)
-    	c = document.getElementById("solution-canvas");
-    else if (decor)
-    	c = document.getElementById("decor-canvas");
-    else
-    	c = document.getElementById("user-canvas");
-	var ctx = c.getContext("2d")
-	ctx.beginPath();
-	ctx.arc(Turtle.CURRENT_COORD.x, Turtle.CURRENT_COORD.y, radius, 0 , 2*Math.PI);
-	ctx.stroke();
-	Turtle.updateImage();
 }
 
 Turtle.turn = function(angle, direction){

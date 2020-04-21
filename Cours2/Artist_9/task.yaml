@@ -1,41 +1,44 @@
 accessible: true
 author: Celine Deknop
+categories: []
+contact_url: ''
 context: Dessin libre ! Tu peux appuyer sur le bouton vert pour regarder le résultat
     et soumettre la tâche pour sauvegarder tes dessins.
-environment: default
+environment_id: default
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
+file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    output: '2'
-    time: '30'
 name: Exercice 9
 network_grading: false
 order: 0
 problems:
     code:
-        options:
-            scrollbars: true
-            visual:
-                position: left
-            oneBasedIndex: true
-            media: /plugins/blockly/static/blockly/media/
-            toolboxPosition: start
-            css: true
-            trashcan: true
-            sounds: true
-            maxBlocks: '45'
-        files:
-        - turtle.js
-        - interpreter.js
         type: blockly
         blocks_files:
         - blocks.js
-        workspace: |-
-            <xml xmlns="http://www.w3.org/1999/xhtml">
-              <variables></variables>
-            </xml>
+        options:
+            media: /plugins/blockly/static/blockly/media/
+            sounds: true
+            css: true
+            toolboxPosition: start
+            scrollbars: true
+            visual:
+                position: left
+            speed: '60'
+            oneBasedIndex: true
+            trashcan: true
+            maxBlocks: '45'
+        files:
+        - ../$common/turtle.js
+        - ../$common/interpreter.js
         name: ''
         toolbox: |-
             <xml xmlns="http://www.w3.org/1999/xhtml">
@@ -77,34 +80,13 @@ problems:
               </block>
             </category>
             </xml>
+        workspace: |-
+            <xml xmlns="http://www.w3.org/1999/xhtml">
+              <variables></variables>
+            </xml>
         header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        type: 2
-        name: Facile
-        description: Faisant partie du parcours facile
-        visible: false
-        id: ''
-    '1':
-        description: Faisant partie du parcours challenge
-        type: 2
-        name: Challenge
-        visible: false
-        id: ''
-    '2':
-        description: Faisant partie du parcours normal
-        name: Normal
-        type: 2
-        visible: false
-        id: ''
-    '3':
-        visible: true
-        name: Lecon5
-        description: ''
-        type: 2
-        id: ''
 weight: 1.0

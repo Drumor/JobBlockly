@@ -1,20 +1,45 @@
 accessible: true
 author: Celine Deknop
+categories: []
+contact_url: ''
 context: Dessine l'autre moitié pour que le dessin soit symétrique. Les triangles
     sont équilatéraux et mesurent 50 pixels de long.
-environment: default
+environment_id: default
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
+file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    output: '2'
-    time: '30'
 name: Exercice 7
 network_grading: false
 order: 0
 problems:
     code:
+        type: blockly
+        blocks_files:
+        - blocks.js
+        options:
+            media: /plugins/blockly/static/blockly/media/
+            sounds: true
+            css: true
+            toolboxPosition: start
+            scrollbars: true
+            visual:
+                position: left
+            speed: '60'
+            oneBasedIndex: true
+            trashcan: true
+            maxBlocks: '45'
+        files:
+        - ../$common/turtle.js
+        - ../$common/interpreter.js
+        name: ''
         toolbox: |-
             <xml xmlns="http://www.w3.org/1999/xhtml">
               <variables></variables>
@@ -52,24 +77,6 @@ problems:
               </block>
             </category>
             </xml>
-        options:
-            scrollbars: true
-            visual:
-                position: left
-            oneBasedIndex: true
-            media: /plugins/blockly/static/blockly/media/
-            css: true
-            trashcan: true
-            toolboxPosition: start
-            sounds: true
-            maxBlocks: '45'
-        files:
-        - turtle.js
-        - interpreter.js
-        type: blockly
-        name: ''
-        blocks_files:
-        - blocks.js
         workspace: |-
             <xml xmlns="http://www.w3.org/1999/xhtml">
               <variables></variables>
@@ -98,41 +105,4 @@ stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        type: 0
-        name: Boucles impbriquées
-        description: ''
-        id: '3'
-        visible: false
-    '1':
-        id: '1'
-        description: ''
-        type: 0
-        visible: true
-        name: Boucle répéter X fois
-    '2':
-        description: ''
-        name: Instructions avec paramètres
-        id: '2'
-        type: 0
-        visible: true
-    '3':
-        name: Normal
-        description: Faisant partie du parcours normal
-        type: 2
-        visible: false
-        id: ''
-    '4':
-        type: 2
-        name: Facile
-        description: Faisant partie du parcours facile
-        visible: false
-        id: ''
-    '5':
-        visible: true
-        description: ''
-        name: Lecon 5
-        type: 2
-        id: ''
 weight: 1.0

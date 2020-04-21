@@ -1,19 +1,47 @@
 accessible: true
 author: Celine Deknop
+categories: []
+contact_url: ''
 context: 'Termine de dessiner la boîte. (Chaque ligne a une longueur de 250 pixels) '
-environment: default
+environment_id: default
+environment_parameters:
+    limits:
+        memory: '100'
+        time: '30'
+        hard_time: ''
+    run_cmd: ''
+environment_type: docker
 evaluate: best
+file: ''
 groups: false
 input_random: '0'
-limits:
-    memory: '100'
-    output: '2'
-    time: '30'
 name: Exercice 1
 network_grading: false
 order: 0
 problems:
     code:
+        options:
+            trashcan: true
+            visual:
+                position: left
+            speed: '60'
+            css: true
+            media: /plugins/blockly/static/blockly/media/
+            sounds: true
+            scrollbars: true
+            oneBasedIndex: true
+            maxBlocks: '45'
+            toolboxPosition: start
+        blocks_files:
+        - blocks.js
+        header: 'Termine de dessiner la boîte. (Chaque ligne a une longueur de 250
+            pixels) '
+        type: blockly
+        workspace: |-
+            <xml xmlns="http://www.w3.org/1999/xhtml">
+              <variables></variables>
+            </xml>
+        name: ''
         toolbox: |-
             <xml xmlns="http://www.w3.org/1999/xhtml">
               <variables></variables>
@@ -51,69 +79,11 @@ problems:
               </block>
             </category>
             </xml>
-        options:
-            scrollbars: true
-            visual:
-                position: left
-            oneBasedIndex: true
-            media: /plugins/blockly/static/blockly/media/
-            toolboxPosition: start
-            css: true
-            trashcan: true
-            sounds: true
-            maxBlocks: '45'
         files:
-        - turtle.js
-        - interpreter.js
-        type: blockly
-        name: ''
-        blocks_files:
-        - blocks.js
-        workspace: |-
-            <xml xmlns="http://www.w3.org/1999/xhtml">
-              <variables></variables>
-            </xml>
-        header: 'Termine de dessiner la boîte. (Chaque ligne a une longueur de 250
-            pixels) '
+        - ../$common/turtle.js
+        - ../$common/interpreter.js
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        type: 0
-        visible: true
-        name: Boucle répéter X fois
-        id: '1'
-        description: ''
-    '1':
-        id: '2'
-        description: ''
-        type: 0
-        visible: true
-        name: Instructions avec paramètres
-    '2':
-        description: Faisant partie du parcours normal
-        name: Normal
-        type: 2
-        visible: false
-        id: ''
-    '3':
-        name: Facile
-        description: Faisant partie du parcours facile
-        type: 2
-        visible: false
-        id: ''
-    '4':
-        type: 2
-        description: Faisant partie du parcours challenge
-        name: Challenge
-        visible: false
-        id: ''
-    '5':
-        visible: true
-        description: ''
-        name: Lecon 5
-        type: 2
-        id: ''
 weight: 1.0

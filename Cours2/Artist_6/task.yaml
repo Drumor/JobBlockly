@@ -1,43 +1,46 @@
 accessible: true
 author: Celine Deknop
+categories: []
+contact_url: ''
 context: La ligne médiane d’un terrain de football est perpendiculaire à ses lignes
     de touche. Ce terrain a un périmètre de 800 pixels et il est long de 240 pixels.
     Quelle est sa largeur ? Trace les limites et la ligne médiane.
-environment: default
+environment_id: default
+environment_parameters:
+    limits:
+        time: '30'
+        hard_time: ''
+        memory: '100'
+    run_cmd: ''
+environment_type: docker
 evaluate: best
+file: ''
 groups: false
 input_random: '0'
-limits:
-    output: '2'
-    memory: '100'
-    time: '30'
 name: Exercice 6
 network_grading: false
 order: 0
 problems:
     code:
+        type: blockly
+        blocks_files:
+        - blocks.js
         options:
+            media: /plugins/blockly/static/blockly/media/
+            sounds: true
+            css: true
+            toolboxPosition: start
             scrollbars: true
             visual:
                 position: left
+            speed: '60'
             oneBasedIndex: true
-            media: /plugins/blockly/static/blockly/media/
-            toolboxPosition: start
-            css: true
             trashcan: true
-            sounds: true
             maxBlocks: '45'
         files:
-        - turtle.js
-        - interpreter.js
-        type: blockly
+        - ../$common/turtle.js
+        - ../$common/interpreter.js
         name: ''
-        blocks_files:
-        - blocks.js
-        workspace: |-
-            <xml xmlns="http://www.w3.org/1999/xhtml">
-              <variables></variables>
-            </xml>
         toolbox: |-
             <xml xmlns="http://www.w3.org/1999/xhtml">
               <variables></variables>
@@ -67,40 +70,13 @@ problems:
               </block>
             </category>
             </xml>
+        workspace: |-
+            <xml xmlns="http://www.w3.org/1999/xhtml">
+              <variables></variables>
+            </xml>
         header: ''
 stored_submissions: 0
 submission_limit:
     amount: -1
     period: -1
-tags:
-    '0':
-        type: 0
-        visible: true
-        name: Instructions avec paramètres
-        description: ''
-        id: '1'
-    '1':
-        id: '2'
-        description: ''
-        type: 0
-        visible: true
-        name: Boucles "répéter X fois"
-    '2':
-        description: Faisant partie du parcours challenge
-        name: Challenge
-        type: 2
-        visible: false
-        id: ''
-    '3':
-        name: Normal
-        description: Faisant partie du parcours normal
-        type: 2
-        visible: false
-        id: ''
-    '4':
-        type: 2
-        description: ''
-        name: Lecon5
-        visible: true
-        id: ''
 weight: 1.0
