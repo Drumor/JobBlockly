@@ -23,7 +23,6 @@ if __name__ == "__main__":
         # feedback.set_global_feedback(rst.get_codeblock('', make_output), True)
         exit(0)
     elif make_output == "True":
-        print("coucou ludo")
         feedback.set_global_result("success")
         feedback.set_global_feedback("Vous avez résolu l'exercice.")
     else:
